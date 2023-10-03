@@ -14,6 +14,17 @@ public class User
     private String phoneNumber;
     private ArrayList<Ticket> tickets;
 
+    public User(int userId, String userFirstName, String userLastName, String username, String password, String phoneNumber, ArrayList<Ticket> tickets)
+    {
+        this.userId = userId;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.username = username;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.tickets = tickets;
+    }
+
     public int getUserId()
     {
         return userId;
@@ -51,10 +62,11 @@ public class User
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getPhoneNumber() {return phoneNumber; }
+    public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
-    
+    public ArrayList<Ticket> getTickets() { return tickets; }
+    public void setTickets(ArrayList<Ticket> tickets) { this.tickets = tickets; }
 
 }
 
