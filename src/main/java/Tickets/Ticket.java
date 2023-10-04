@@ -1,7 +1,12 @@
 package Tickets;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
 public class Ticket
 {
     private long ticketId;
@@ -23,8 +28,7 @@ public class Ticket
             double price,
             LocalDateTime timeOfDeparture,
             LocalDateTime estimatedTimeOfArrival,
-            boolean refundable)
-    {
+            boolean refundable) {
         this.ticketId = ticketId;
         this.trainId = trainId;
         this.departureLocation = departureLocation;
@@ -33,65 +37,6 @@ public class Ticket
         this.price = price;
         this.timeOfDeparture = timeOfDeparture;
         this.estimatedTimeOfArrival = estimatedTimeOfArrival;
-        this.refundable = refundable;
-    }
-
-    public long getTicketId() { return ticketId; }
-    public void setTicketId(long ticketId) { this.ticketId = ticketId; }
-
-    public String getTrainId() {
-        return trainId;
-    }
-    public void setTrainId(String trainId) {
-        this.trainId = trainId;
-    }
-
-    public String getDepartureLocation() {
-        return departureLocation;
-    }
-    public void setDepartureLocation(String departureLocation) {
-        this.departureLocation = departureLocation;
-    }
-
-    public String getArrivalLocation() {
-        return arrivalLocation;
-    }
-    public void setArrivalLocation(String arrivalLocation) {
-        this.arrivalLocation = arrivalLocation;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public LocalDateTime getTimeOfDeparture() {
-        return timeOfDeparture;
-    }
-    public void setTimeOfDeparture(LocalDateTime timeOfDeparture) {
-        this.timeOfDeparture = timeOfDeparture;
-    }
-
-    public LocalDateTime getEstimatedTimeOfArrival() {
-        return estimatedTimeOfArrival;
-    }
-    public void setEstimatedTimeOfArrival(LocalDateTime estimatedTimeOfArrival) {
-        this.estimatedTimeOfArrival = estimatedTimeOfArrival;
-    }
-
-    public boolean isRefundable() {
-        return refundable;
-    }
-    public void setRefundable(boolean refundable) {
         this.refundable = refundable;
     }
 }
