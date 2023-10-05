@@ -1,5 +1,6 @@
 package Tickets;
 
+import Users.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class Ticket
 {
-    private long ticketId;
+    private int ticketId;
     private String trainId;
     private String departureLocation;
     private String arrivalLocation;
@@ -18,9 +19,10 @@ public class Ticket
     private LocalDateTime timeOfDeparture;
     private LocalDateTime estimatedTimeOfArrival;
     private boolean refundable;
+    private User user;
 
     public Ticket(
-            long ticketId,
+            int ticketId,
             String trainId,
             String departureLocation,
             String arrivalLocation,
@@ -28,7 +30,8 @@ public class Ticket
             double price,
             LocalDateTime timeOfDeparture,
             LocalDateTime estimatedTimeOfArrival,
-            boolean refundable) {
+            boolean refundable,
+            User user) {
         this.ticketId = ticketId;
         this.trainId = trainId;
         this.departureLocation = departureLocation;
@@ -38,5 +41,6 @@ public class Ticket
         this.timeOfDeparture = timeOfDeparture;
         this.estimatedTimeOfArrival = estimatedTimeOfArrival;
         this.refundable = refundable;
+        this.user = user;
     }
 }
