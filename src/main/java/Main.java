@@ -1,3 +1,4 @@
+import Logic.DatabaseLogic;
 import Logic.LogicTrainTicketReservationSystem;
 
 public class Main
@@ -16,8 +17,10 @@ public class Main
 		[ ] - user can logout
          */
 
-        LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
-        logic.reservationSystem();
+        //LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
+        //logic.reservationSystem();
+
+        //DatabaseLogic dbLogic = new DatabaseLogic();
 
     }
 }

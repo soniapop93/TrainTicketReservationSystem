@@ -1,9 +1,6 @@
 package Logic;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Map;
 
 public class DatabaseLogic {
@@ -15,10 +12,11 @@ public class DatabaseLogic {
         generateDB();
         createTableUsers();
         createTableTickets();
+        createTableTrains();
     }
 
     private void generateDB() {
-        String fileName = dbName + ".db";
+        String fileName = dbName;
         createConnection(fileName);
     }
 
@@ -61,7 +59,7 @@ public class DatabaseLogic {
                 "password TEXT, " +
                 "phoneNumber TEXT);", tableNames.get("users"));
 
-        createStatement(strSql);
+        executeStatementUpdate(strSql);
     }
 
     private void createTableTickets() {
@@ -77,7 +75,7 @@ public class DatabaseLogic {
                 "refundable BOOLEAN, " +
                 "userId INTEGER);", tableNames.get("tickets"));
 
-        createStatement(strSql);
+        executeStatementUpdate(strSql);
     }
 
     private void createTableTrains() {
@@ -87,10 +85,10 @@ public class DatabaseLogic {
                 "arrivalLocation TEXT, " +
                 "seatsAvailable INTEGER, " +
                 "seatsTotal INTEGER);", tableNames.get("trains"));
-        createStatement(strSql);
+        executeStatementUpdate(strSql);
     }
 
-    private void createStatement(String strSql) {
+    private void executeStatementUpdate(String strSql) {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(strSql);
@@ -98,6 +96,28 @@ public class DatabaseLogic {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private ResultSet executeStatementQuery(String strSql) {
+        ResultSet result = null;
+
+        try {
+            Statement statement = connection.createStatement();
+            result = statement.executeQuery(strSql);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private ResultSet getUser(int userId) {
+
+        String strSql = String.format("SELECT * FROM %s WHERE id=%s", tableNames.get("users"), userId);
+        ResultSet result = executeStatementQuery(strSql);
+
+        return result;
     }
 
 }
