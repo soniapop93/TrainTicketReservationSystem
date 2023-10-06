@@ -61,13 +61,7 @@ public class DatabaseLogic {
                 "password TEXT, " +
                 "phoneNumber TEXT);", tableNames.get("users"));
 
-        try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(strSql);
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-        }
+        createStatement(strSql);
     }
 
     private void createTableTickets() {
@@ -82,5 +76,28 @@ public class DatabaseLogic {
                 "estimatedTimeOfArrival DATETIME, " +
                 "refundable BOOLEAN, " +
                 "userId INTEGER);", tableNames.get("tickets"));
+
+        createStatement(strSql);
     }
+
+    private void createTableTrains() {
+        String strSql = String.format("CREATE TABLE IF NOT EXISTS %s " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "departureLocation TEXT, " +
+                "arrivalLocation TEXT, " +
+                "seatsAvailable INTEGER, " +
+                "seatsTotal INTEGER);", tableNames.get("trains"));
+        createStatement(strSql);
+    }
+
+    private void createStatement(String strSql) {
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(strSql);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }
