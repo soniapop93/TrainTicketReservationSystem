@@ -113,11 +113,26 @@ public class DatabaseLogic {
     }
 
     private ResultSet getUser(int userId) {
+        return getResultById(tableNames.get("users"), userId);
+    }
 
-        String strSql = String.format("SELECT * FROM %s WHERE id=%s", tableNames.get("users"), userId);
+    private ResultSet getTicketById(int ticketId) {
+        return getResultById(tableNames.get("tickets"), ticketId);
+    }
+
+    private ResultSet getTicketsByUserId(int userId) {
+        return getResultById(tableNames.get("tickets"), userId);
+    }
+
+    private ResultSet getResultById(String tableName, int id) {
+        String strSql = String.format("SELECT * FROM %s WHERE id=%s", tableName, id);
         ResultSet result = executeStatementQuery(strSql);
 
         return result;
+    }
+
+    private void insertData() {
+        //finish it
     }
 
 }
