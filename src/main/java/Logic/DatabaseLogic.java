@@ -1,5 +1,7 @@
 package Logic;
 
+import Users.User;
+
 import java.sql.*;
 import java.util.Map;
 
@@ -54,7 +56,7 @@ public class DatabaseLogic {
         String strSql = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "firstName TEXT, " +
-                "lastNameText, " +
+                "lastName TEXT, " +
                 "username TEXT, " +
                 "password TEXT, " +
                 "phoneNumber TEXT);", tableNames.get("users"));
@@ -131,8 +133,13 @@ public class DatabaseLogic {
         return result;
     }
 
-    private void insertData() {
-        //finish it
+    private void insertDataUsers(User user) {
+        String strSql = String.format("INSERT INTO %s " +
+                "(firstName, lastName, username, password, phoneNumber) VALUES " +
+                "(%s, %s, %s, %s, %s", tableNames.get("users"),
+                user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
+
+        executeStatementUpdate(strSql);
     }
 
 }
