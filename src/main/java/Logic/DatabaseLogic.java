@@ -1,5 +1,7 @@
 package Logic;
 
+import Tickets.Ticket;
+import Trains.Train;
 import Users.User;
 
 import java.sql.*;
@@ -51,8 +53,7 @@ public class DatabaseLogic {
         }
     }
 
-    private void createTableUsers()
-    {
+    private void createTableUsers() {
         String strSql = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "firstName TEXT, " +
@@ -136,8 +137,25 @@ public class DatabaseLogic {
     private void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
                 "(firstName, lastName, username, password, phoneNumber) VALUES " +
-                "(%s, %s, %s, %s, %s", tableNames.get("users"),
+                "(%s, %s, %s, %s, %s);", tableNames.get("users"),
                 user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
+
+        executeStatementUpdate(strSql);
+    }
+
+    private void insertDataTickets(Ticket ticket) {
+        String strSql = String.format("INSERT INTO %s " +
+                "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, userId) VALUES " +
+                "(%s, %s, %s, %s, %s, %s, %s, %s, %s);", tableNames.get("tickets"),
+                ticket.getTrainId(), ticket.getDepartureLocation(), ticket.getArrivalLocation(), ticket.getSeatNumber(), ticket.getPrice(), ticket.getTimeOfDeparture(), ticket.getEstimatedTimeOfArrival(), ticket.isRefundable(), ticket.getUser().getUserId());
+
+        executeStatementUpdate(strSql);
+    }
+
+    private void insertDataTrains(Train train) {
+        String strSql = String.format("INSERT INTO %s " +
+                "(departureLocation, arrivalLocation, seatsAvailable, seatsTotal) VALUES " +
+                "(%s, %s, %s, %s", tableNames.get("trains"), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
 
         executeStatementUpdate(strSql);
     }
