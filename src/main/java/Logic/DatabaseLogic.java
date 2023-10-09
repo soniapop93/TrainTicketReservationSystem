@@ -134,6 +134,17 @@ public class DatabaseLogic {
         return result;
     }
 
+    private ResultSet getAll(String tableName) {
+        String strSql = String.format("SELECT * FROM %s", tableName);
+        ResultSet result = executeStatementQuery(strSql);
+
+        return result;
+    }
+
+    public ResultSet getAllTrains() {
+        return getAll(tableNames.get("trains"));
+    }
+
     private void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
                 "(firstName, lastName, username, password, phoneNumber) VALUES " +
