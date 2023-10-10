@@ -24,15 +24,13 @@ public class User
             String userLastName,
             String username,
             String password,
-            String phoneNumber,
-            ArrayList<Ticket> tickets) {
+            String phoneNumber) {
         this.userId = userId;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.tickets = tickets;
     }
 }
 

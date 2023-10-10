@@ -1,5 +1,7 @@
 import Logic.DatabaseLogic;
 import Logic.LogicTrainTicketReservationSystem;
+import Trains.Train;
+import Trains.TrainLogic;
 
 public class Main
 {
@@ -20,7 +22,11 @@ public class Main
         //LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
         //logic.reservationSystem();
 
-        //DatabaseLogic dbLogic = new DatabaseLogic();
+        DatabaseLogic dbLogic = new DatabaseLogic();
+
+        TrainLogic trainLogic = new TrainLogic(dbLogic);
+
+        trainLogic.listTrains();
 
     }
 }

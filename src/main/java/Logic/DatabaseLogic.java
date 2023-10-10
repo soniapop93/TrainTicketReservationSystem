@@ -36,21 +36,21 @@ public class DatabaseLogic {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-        finally
-        {
-            try
-            {
-                if (connection != null)
-                {
-                    connection.close();
-                }
-            }
-            catch(SQLException e)
-            {
-                System.err.println(e.getMessage());
-                e.printStackTrace();
-            }
-        }
+//        finally
+//        {
+//            try
+//            {
+//                if (connection != null)
+//                {
+//                    connection.close();
+//                }
+//            }
+//            catch(SQLException e)
+//            {
+//                System.err.println(e.getMessage());
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     private void createTableUsers() {
@@ -116,19 +116,23 @@ public class DatabaseLogic {
     }
 
     private ResultSet getUser(int userId) {
-        return getResultById(tableNames.get("users"), userId);
+        return getResultByColumnName(tableNames.get("users"), "id", Integer.toString(userId));
+    }
+
+    public ResultSet getUserByUsername(String username) {
+        return getResultByColumnName(tableNames.get("users"), "username", username);
     }
 
     private ResultSet getTicketById(int ticketId) {
-        return getResultById(tableNames.get("tickets"), ticketId);
+        return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(ticketId));
     }
 
     private ResultSet getTicketsByUserId(int userId) {
-        return getResultById(tableNames.get("tickets"), userId);
+        return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(userId));
     }
 
-    private ResultSet getResultById(String tableName, int id) {
-        String strSql = String.format("SELECT * FROM %s WHERE id=%s", tableName, id);
+    private ResultSet getResultByColumnName(String tableName, String columnName, String item) {
+        String strSql = String.format("SELECT * FROM %s WHERE %s=%s", tableName, columnName, item);
         ResultSet result = executeStatementQuery(strSql);
 
         return result;
@@ -145,7 +149,7 @@ public class DatabaseLogic {
         return getAll(tableNames.get("trains"));
     }
 
-    private void insertDataUsers(User user) {
+    public void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
                 "(firstName, lastName, username, password, phoneNumber) VALUES " +
                 "(%s, %s, %s, %s, %s);", tableNames.get("users"),
@@ -163,10 +167,10 @@ public class DatabaseLogic {
         executeStatementUpdate(strSql);
     }
 
-    private void insertDataTrains(Train train) {
+    public void insertDataTrains(Train train) {
         String strSql = String.format("INSERT INTO %s " +
                 "(departureLocation, arrivalLocation, seatsAvailable, seatsTotal) VALUES " +
-                "(%s, %s, %s, %s", tableNames.get("trains"), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
+                "('%s', '%s', '%s', '%s');", tableNames.get("trains"), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
 
         executeStatementUpdate(strSql);
     }
