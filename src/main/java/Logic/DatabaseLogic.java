@@ -75,6 +75,7 @@ public class DatabaseLogic {
                 "price DOUBLE, " +
                 "timeOfDeparture DATETIME, " +
                 "estimatedTimeOfArrival DATETIME, " +
+                "reservationTime DATETIME, " +
                 "refundable BOOLEAN, " +
                 "userId INTEGER);", tableNames.get("tickets"));
 
@@ -160,9 +161,9 @@ public class DatabaseLogic {
 
     private void insertDataTickets(Ticket ticket) {
         String strSql = String.format("INSERT INTO %s " +
-                "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, userId) VALUES " +
-                "(%s, %s, %s, %s, %s, %s, %s, %s, %s);", tableNames.get("tickets"),
-                ticket.getTrainId(), ticket.getDepartureLocation(), ticket.getArrivalLocation(), ticket.getSeatNumber(), ticket.getPrice(), ticket.getTimeOfDeparture(), ticket.getEstimatedTimeOfArrival(), ticket.isRefundable(), ticket.getUser().getUserId());
+                "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, reservationTime, userId) VALUES " +
+                "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", tableNames.get("tickets"),
+                ticket.getTrainId(), ticket.getDepartureLocation(), ticket.getArrivalLocation(), ticket.getSeatNumber(), ticket.getPrice(), ticket.getTimeOfDeparture(), ticket.getEstimatedTimeOfArrival(), ticket.isRefundable(), ticket.getReservationTime(), ticket.getUser().getUserId());
 
         executeStatementUpdate(strSql);
     }
