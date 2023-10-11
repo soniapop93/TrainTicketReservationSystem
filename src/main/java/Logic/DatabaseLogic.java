@@ -133,7 +133,7 @@ public class DatabaseLogic {
     }
 
     private ResultSet getResultByColumnName(String tableName, String columnName, String item) {
-        String strSql = String.format("SELECT * FROM %s WHERE %s=%s", tableName, columnName, item);
+        String strSql = String.format("SELECT * FROM %s WHERE %s='%s'", tableName, columnName, item);
         ResultSet result = executeStatementQuery(strSql);
 
         return result;
@@ -153,7 +153,7 @@ public class DatabaseLogic {
     public void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
                 "(firstName, lastName, username, password, phoneNumber) VALUES " +
-                "(%s, %s, %s, %s, %s);", tableNames.get("users"),
+                "('%s', '%s', '%s', '%s', '%s');", tableNames.get("users"),
                 user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
 
         executeStatementUpdate(strSql);

@@ -19,14 +19,14 @@ public class Main
 		[ ] - user can logout
          */
 
-        //LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
-        //logic.reservationSystem();
+        LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
+        logic.reservationSystem();
 
-        DatabaseLogic dbLogic = new DatabaseLogic();
+        //DatabaseLogic dbLogic = new DatabaseLogic();
 
-        TrainLogic trainLogic = new TrainLogic(dbLogic);
+        //TrainLogic trainLogic = new TrainLogic(dbLogic);
 
-        trainLogic.listTrains();
+        //trainLogic.listTrains();
 
     }
 }

@@ -1,5 +1,6 @@
 package Logic;
 
+import Users.User;
 import Users.UserLogic;
 import Utilities.InputFromUser;
 
@@ -12,8 +13,9 @@ public class LogicTrainTicketReservationSystem {
     private boolean loggedIn = false;
 
     public void reservationSystem() {
-
         InputFromUser inputFromUser = new InputFromUser();
+        DatabaseLogic databaseLogic = new DatabaseLogic();
+        UserLogic userLogic = new UserLogic(databaseLogic);
 
         String optionStrSelected = ">>> You have selected option: ";
 
@@ -37,6 +39,8 @@ public class LogicTrainTicketReservationSystem {
                         break;
                     case "3": // Logout
                         System.out.println(optionStrSelected + "3." + optionList.get(4) + "\n");
+                        loggedIn = false;
+                        System.out.println("Logged out");
                         break;
                     case "4": // Exit
                         System.out.println(optionStrSelected + "4." + optionList.get(5) + "\n");
@@ -55,12 +59,20 @@ public class LogicTrainTicketReservationSystem {
                         break;
                     case "3": // Create new account
                         System.out.println(optionStrSelected + "3." + optionList.get(2) + "\n");
+                        userLogic.getNewUser();
+
                         break;
                     case "4": // Login in my account
                         System.out.println(optionStrSelected + "4." + optionList.get(3) + "\n");
 
+                        loggedIn = userLogic.getCredentialsForLoginFromUser();
 
-
+                        if (loggedIn) {
+                            System.out.println("Logged in successfully");
+                        }
+                        else {
+                            System.out.println("Try again. Username or password is incorrect...");
+                        }
 
                         break;
                     case "5": // Exit

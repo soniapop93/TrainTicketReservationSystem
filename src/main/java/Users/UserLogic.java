@@ -14,8 +14,9 @@ public class UserLogic {
         this.db = db;
     }
 
-    public void addUser(User user) {
+    private void addUser(User user) {
         db.insertDataUsers(user);
+        System.out.println("User registered");
     }
 
     // Function that will get the user to be logged in, by username
@@ -25,8 +26,8 @@ public class UserLogic {
         try {
             while (result.next()) {
                 int userId = result.getInt("id");
-                String userFirstName = result.getString("userFirstName");
-                String userLastName = result.getString("userLastName");
+                String userFirstName = result.getString("firstName");
+                String userLastName = result.getString("lastName");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
                 String phoneNumber = result.getString("phoneNumber");
@@ -58,6 +59,27 @@ public class UserLogic {
             }
         }
         return false;
+    }
+
+    public void getNewUser() {
+        System.out.print("Add First Name: ");
+        String userFirstName = inputFromUser.getInputFromUser();
+
+        System.out.print("Add Last Name: ");
+        String userLastName = inputFromUser.getInputFromUser();
+
+        System.out.print("Add username: ");
+        String username = inputFromUser.getInputFromUser();
+
+        System.out.print("Add password: ");
+        String password = inputFromUser.getInputFromUser();
+
+        System.out.print("Add phoneNumber: ");
+        String phoneNumber = inputFromUser.getInputFromUser();
+
+        User user = new User(-1, userFirstName, userLastName, username, password, phoneNumber);
+
+        addUser(user);
     }
 
     private boolean checkIfPasswordIsCorrect(User user, String password) {
