@@ -1,16 +1,20 @@
 package Logic;
 
+import Users.UserLogic;
+import Utilities.InputFromUser;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class LogicTrainTicketReservationSystem {
 
     private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList("See available train list", "Make a reservation", "Create new account", "Login in my account", "Logout", "Exit"));
-    private Scanner input = new Scanner(System.in);
     private boolean loggedIn = false;
 
     public void reservationSystem() {
+
+        InputFromUser inputFromUser = new InputFromUser();
+
         String optionStrSelected = ">>> You have selected option: ";
 
         printWelcomeMessage();
@@ -18,7 +22,7 @@ public class LogicTrainTicketReservationSystem {
         while (true) {
             optionMenu(loggedIn);
             System.out.print(">>> Add option number: ");
-            String input = getInputFromUser();
+            String input = inputFromUser.getInputFromUser();
             System.out.println("-----------------------");
 
             if (loggedIn) {
@@ -54,6 +58,10 @@ public class LogicTrainTicketReservationSystem {
                         break;
                     case "4": // Login in my account
                         System.out.println(optionStrSelected + "4." + optionList.get(3) + "\n");
+
+
+
+
                         break;
                     case "5": // Exit
                         return;
@@ -62,9 +70,7 @@ public class LogicTrainTicketReservationSystem {
         }
     }
 
-    private String getInputFromUser() {
-        return input.nextLine();
-    }
+
 
     private void printWelcomeMessage() {
         System.out.println("==================================================");
@@ -72,7 +78,6 @@ public class LogicTrainTicketReservationSystem {
         System.out.println("==================================================");
         System.out.println(" ");
     }
-
     private void optionMenu(boolean loggedIn) {
         String menuString = "";
 
@@ -87,4 +92,5 @@ public class LogicTrainTicketReservationSystem {
 
         System.out.println(menuString);
     }
+
 }

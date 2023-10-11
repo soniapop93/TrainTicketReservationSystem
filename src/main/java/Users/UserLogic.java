@@ -1,12 +1,14 @@
 package Users;
 
 import Logic.DatabaseLogic;
+import Utilities.InputFromUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserLogic {
     private DatabaseLogic db;
+    InputFromUser inputFromUser = new InputFromUser();
 
     public UserLogic(DatabaseLogic db) {
         this.db = db;
@@ -17,7 +19,7 @@ public class UserLogic {
     }
 
     // Function that will get the user to be logged in, by username
-    public boolean getUser(String username, String password){
+    private User getUser(String username, String password){
         ResultSet result = db.getUserByUsername(username);
 
         try {
@@ -31,14 +33,30 @@ public class UserLogic {
 
                 User user = new User(userId, userFirstName, userLastName, userDB, passDB, phoneNumber);
 
-                return checkIfPasswordIsCorrect(user, password);
-
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
 
+        return null;
+    }
+
+    public boolean getCredentialsForLoginFromUser() {
+        System.out.print("Add username: ");
+        String username = inputFromUser.getInputFromUser();
+
+        System.out.print("Add password: ");
+        String password = inputFromUser.getInputFromUser();
+
+        if (username != null && password != null) {
+            User user = getUser(username, password);
+
+            if (user != null) {
+                return checkIfPasswordIsCorrect(user, password);
+            }
+        }
         return false;
     }
 
