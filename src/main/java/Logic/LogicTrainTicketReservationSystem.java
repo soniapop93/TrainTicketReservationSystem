@@ -1,5 +1,6 @@
 package Logic;
 
+import Trains.TrainLogic;
 import Users.User;
 import Users.UserLogic;
 import Utilities.InputFromUser;
@@ -16,6 +17,8 @@ public class LogicTrainTicketReservationSystem {
         InputFromUser inputFromUser = new InputFromUser();
         DatabaseLogic databaseLogic = new DatabaseLogic();
         UserLogic userLogic = new UserLogic(databaseLogic);
+        TrainLogic trainLogic = new TrainLogic(databaseLogic);
+
 
         String optionStrSelected = ">>> You have selected option: ";
 
@@ -31,17 +34,27 @@ public class LogicTrainTicketReservationSystem {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
+                        break;
+
                     case "1": // See available train list
                         System.out.println(optionStrSelected + "1." + optionList.get(0) + "\n");
+
+                        trainLogic.listTrains();
+
                         break;
+
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
                         break;
+
                     case "3": // Logout
                         System.out.println(optionStrSelected + "3." + optionList.get(4) + "\n");
+
                         loggedIn = false;
+
                         System.out.println("Logged out");
                         break;
+
                     case "4": // Exit
                         System.out.println(optionStrSelected + "4." + optionList.get(5) + "\n");
                         return;
@@ -51,17 +64,25 @@ public class LogicTrainTicketReservationSystem {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
+                        break;
+
                     case "1": // See available train list
                         System.out.println(optionStrSelected + "1." + optionList.get(0) + "\n");
+
+                        trainLogic.listTrains();
+
                         break;
+
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
                         break;
+
                     case "3": // Create new account
                         System.out.println(optionStrSelected + "3." + optionList.get(2) + "\n");
                         userLogic.getNewUser();
 
                         break;
+
                     case "4": // Login in my account
                         System.out.println(optionStrSelected + "4." + optionList.get(3) + "\n");
 
@@ -73,8 +94,8 @@ public class LogicTrainTicketReservationSystem {
                         else {
                             System.out.println("Try again. Username or password is incorrect...");
                         }
-
                         break;
+
                     case "5": // Exit
                         return;
                 }
@@ -103,6 +124,7 @@ public class LogicTrainTicketReservationSystem {
         }
 
         System.out.println(menuString);
+        System.out.println("----------------------------------");
     }
 
 }

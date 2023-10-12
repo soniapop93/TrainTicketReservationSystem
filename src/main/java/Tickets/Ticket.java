@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Ticket
 {
     private int ticketId;
-    private String trainId;
+    private int trainId;
     private String departureLocation;
     private String arrivalLocation;
     private int seatNumber;
@@ -24,7 +24,7 @@ public class Ticket
 
     public Ticket(
             int ticketId,
-            String trainId,
+            int trainId,
             String departureLocation,
             String arrivalLocation,
             int seatNumber,

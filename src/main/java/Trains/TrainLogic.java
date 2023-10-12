@@ -14,7 +14,6 @@ public class TrainLogic {
     public void listTrains() {
         ResultSet result = db.getAllTrains();
 
-
         try {
             while(result.next()) {
                 int id = result.getInt("id");
@@ -26,7 +25,6 @@ public class TrainLogic {
                 Train train = new Train(id, departureLocation, arrivalLocation, seatsAvailable, seatsTotal);
 
                 printResult(train);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,9 +35,31 @@ public class TrainLogic {
         db.insertDataTrains(train);
     }
 
+    public Train getTrain(int trainId) {
+        ResultSet trainResult = db.getTrainById(trainId);
+
+        try {
+            while(trainResult.next()) {
+                int id = trainResult.getInt("id");
+                String departureLocation = trainResult.getString("departureLocation");
+                String arrivalLocation = trainResult.getString("arrivalLocation");
+                int seatsAvailable = trainResult.getInt("seatsAvailable");
+                int seatsTotal = trainResult.getInt("seatsTotal");
+
+                Train train = new Train(id, departureLocation, arrivalLocation, seatsAvailable, seatsTotal);
+
+                return train;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
     private void printResult(Train train) {
 
-        String output = String.format("Train ID: %s | Departure Location: %s | Arrival Location: %s | Seats Available: %s | Total Seats: %s",
+        String output = String.format("--> Train ID: %s | Departure Location: %s | Arrival Location: %s | Seats Available: %s | Total Seats: %s",
                 train.getTrainId(), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
 
         System.out.println(output);

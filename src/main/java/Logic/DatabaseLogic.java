@@ -68,7 +68,7 @@ public class DatabaseLogic {
     private void createTableTickets() {
         String strSql = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "trainID TEXT, " +
+                "trainID INTEGER, " +
                 "departureLocation TEXT, " +
                 "arrivalLocation TEXT, " +
                 "seatNumber INTEGER, " +
@@ -132,6 +132,10 @@ public class DatabaseLogic {
         return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(userId));
     }
 
+    public ResultSet getTrainById(int trainId) {
+        return getResultByColumnName(tableNames.get("trains"), "id", Integer.toString(trainId));
+    }
+
     private ResultSet getResultByColumnName(String tableName, String columnName, String item) {
         String strSql = String.format("SELECT * FROM %s WHERE %s='%s'", tableName, columnName, item);
         ResultSet result = executeStatementQuery(strSql);
@@ -162,7 +166,7 @@ public class DatabaseLogic {
     private void insertDataTickets(Ticket ticket) {
         String strSql = String.format("INSERT INTO %s " +
                 "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, reservationTime, userId) VALUES " +
-                "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", tableNames.get("tickets"),
+                "('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", tableNames.get("tickets"),
                 ticket.getTrainId(), ticket.getDepartureLocation(), ticket.getArrivalLocation(), ticket.getSeatNumber(), ticket.getPrice(), ticket.getTimeOfDeparture(), ticket.getEstimatedTimeOfArrival(), ticket.isRefundable(), ticket.getReservationTime(), ticket.getUser().getUserId());
 
         executeStatementUpdate(strSql);
