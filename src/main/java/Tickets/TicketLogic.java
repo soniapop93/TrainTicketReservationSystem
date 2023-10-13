@@ -3,6 +3,7 @@ package Tickets;
 import Logic.DatabaseLogic;
 import Trains.Train;
 import Trains.TrainLogic;
+import Users.User;
 import Users.UserLogic;
 
 import java.sql.*;
@@ -15,7 +16,7 @@ public class TicketLogic {
         this.db = db;
     }
 
-    public void makeReservation (int userId, int trainId) {
+    public void makeReservation (int userId, int trainId, User user) {
         TrainLogic trainLogic = new TrainLogic(db);
         UserLogic userLogic = new UserLogic(db);
 
@@ -29,13 +30,13 @@ public class TicketLogic {
                     train.getTrainId(),
                     train.getDepartureLocation(),
                     train.getArrivalLocation(),
-                    -1, //todo: implement seats in db
-                    -1, //todo: implelemet price in train db
-                    -1, //todo: impplement timeofdeparture in train db
-                    -1, //todo: implement estimated time of arrival in train db
+                    train.getSeatsTotal() - train.getSeatsAvailable(), //todo: implement seats in db
+                    train.getPrice(), //todo: implelemet price in train db
+                    train.getTimeOfDeparture(), //todo: impplement timeofdeparture in train db
+                    train.getEstimatedTimeOfArrival(), //todo: implement estimated time of arrival in train db
                     true,
                     LocalDateTime.now(),
-                    );
+                    user);
         }
     }
 
