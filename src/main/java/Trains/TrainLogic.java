@@ -4,6 +4,7 @@ import Logic.DatabaseLogic;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class TrainLogic {
     private DatabaseLogic db;
@@ -21,8 +22,23 @@ public class TrainLogic {
                 String arrivalLocation = result.getString("arrivalLocation");
                 int seatsAvailable = result.getInt("seatsAvailable");
                 int seatsTotal = result.getInt("seatsTotal");
+                double price = result.getDouble("price");
+                double distance = result.getDouble("distance");
+                LocalDateTime timeOfDeparture = LocalDateTime.parse(result.getString("timeOfDeparture"));
+                LocalDateTime estimatedTimeOfArrival = LocalDateTime.parse(result.getString("estimatedTimeOfArrival"));
 
-                Train train = new Train(id, departureLocation, arrivalLocation, seatsAvailable, seatsTotal);
+
+                Train train = new Train(
+                        id,
+                        departureLocation,
+                        arrivalLocation,
+                        seatsAvailable,
+                        seatsTotal,
+                        price,
+                        distance,
+                        timeOfDeparture,
+                        estimatedTimeOfArrival);
+
 
                 printResult(train);
             }
@@ -45,8 +61,22 @@ public class TrainLogic {
                 String arrivalLocation = trainResult.getString("arrivalLocation");
                 int seatsAvailable = trainResult.getInt("seatsAvailable");
                 int seatsTotal = trainResult.getInt("seatsTotal");
+                double price = trainResult.getDouble("price");
+                double distance = trainResult.getDouble("distance");
+                LocalDateTime timeOfDeparture = LocalDateTime.parse(trainResult.getString("timeOfDeparture"));
+                LocalDateTime estimatedTimeOfArrival = LocalDateTime.parse(trainResult.getString("estimatedTimeOfArrival"));
 
-                Train train = new Train(id, departureLocation, arrivalLocation, seatsAvailable, seatsTotal);
+
+                Train train = new Train(
+                        id,
+                        departureLocation,
+                        arrivalLocation,
+                        seatsAvailable,
+                        seatsTotal,
+                        price,
+                        distance,
+                        timeOfDeparture,
+                        estimatedTimeOfArrival);
 
                 return train;
             }
@@ -59,8 +89,23 @@ public class TrainLogic {
 
     private void printResult(Train train) {
 
-        String output = String.format("--> Train ID: %s | Departure Location: %s | Arrival Location: %s | Seats Available: %s | Total Seats: %s",
-                train.getTrainId(), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
+        String output = String.format("--> Train ID: %s | " +
+                        "Departure Location: %s | " +
+                        "Arrival Location: %s | " +
+                        "Seats Available: %s | " +
+                        "Price: %s | " +
+                        "Distance: %s | " +
+                        "Time of Departure: %s | " +
+                        "Estimated time of Arrival: %s",
+                train.getTrainId(),
+                train.getDepartureLocation(),
+                train.getArrivalLocation(),
+                train.getSeatsAvailable(),
+                train.getSeatsTotal(),
+                train.getPrice(),
+                train.getDistance(),
+                train.getTimeOfDeparture(),
+                train.getEstimatedTimeOfArrival());
 
         System.out.println(output);
     }

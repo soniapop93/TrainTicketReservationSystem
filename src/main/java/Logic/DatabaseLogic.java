@@ -88,7 +88,11 @@ public class DatabaseLogic {
                 "departureLocation TEXT, " +
                 "arrivalLocation TEXT, " +
                 "seatsAvailable INTEGER, " +
-                "seatsTotal INTEGER);", tableNames.get("trains"));
+                "seatsTotal INTEGER, " +
+                "price DOUBLE, " +
+                "distance DOUBLE, " +
+                "timeOfDeparture DATETIME, " +
+                "estimatedTimeOfArrival DATETIME);", tableNames.get("trains"));
         executeStatementUpdate(strSql);
     }
 
@@ -174,8 +178,24 @@ public class DatabaseLogic {
 
     public void insertDataTrains(Train train) {
         String strSql = String.format("INSERT INTO %s " +
-                "(departureLocation, arrivalLocation, seatsAvailable, seatsTotal) VALUES " +
-                "('%s', '%s', '%s', '%s');", tableNames.get("trains"), train.getDepartureLocation(), train.getArrivalLocation(), train.getSeatsAvailable(), train.getSeatsTotal());
+                "(departureLocation, " +
+                "arrivalLocation, " +
+                "seatsAvailable, " +
+                "seatsTotal, " +
+                "price, " +
+                "distance, " +
+                "timeOfDeparture, " +
+                "estimatedTimeOfArrival) VALUES " +
+                "('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+                tableNames.get("trains"),
+                train.getDepartureLocation(),
+                train.getArrivalLocation(),
+                train.getSeatsAvailable(),
+                train.getSeatsTotal(),
+                train.getPrice(),
+                train.getDistance(),
+                train.getTimeOfDeparture(),
+                train.getEstimatedTimeOfArrival());
 
         executeStatementUpdate(strSql);
     }
