@@ -5,6 +5,7 @@ import Trains.Train;
 import Trains.TrainLogic;
 import Users.User;
 import Users.UserLogic;
+import Utilities.InputFromUser;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -16,12 +17,12 @@ public class TicketLogic {
         this.db = db;
     }
 
-    public void makeReservation (int userId, int trainId, User user) {
+    private Ticket makeReservation (int userId, int trainId) {
         TrainLogic trainLogic = new TrainLogic(db);
         UserLogic userLogic = new UserLogic(db);
 
         Train train = trainLogic.getTrain(trainId);
-        //todo: implement to get the User based on userid
+        User user = userLogic.returnUser(userId);
 
 
         if (train != null) {
@@ -37,7 +38,34 @@ public class TicketLogic {
                     true,
                     LocalDateTime.now(),
                     user);
+
+            return ticket;
         }
+
+        return null;
     }
 
+    public void getReservationOptionsFromUser(int userId) {
+        InputFromUser inputFromUser = new InputFromUser();
+
+        System.out.print("Please enter the train ID you want a ticket for: ");
+
+        try {
+            int trainId = Integer.parseInt(inputFromUser.getInputFromUser());
+
+            if (trainId > 0) {
+
+                Ticket ticket = makeReservation(userId, trainId);
+
+                if (ticket != null) {
+                    db.insertDataTickets(ticket);
+                    System.out.println("Reservation ticket generated successfully");
+                }
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

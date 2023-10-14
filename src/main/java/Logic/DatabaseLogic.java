@@ -120,7 +120,7 @@ public class DatabaseLogic {
         return result;
     }
 
-    private ResultSet getUser(int userId) {
+    public ResultSet getUser(int userId) {
         return getResultByColumnName(tableNames.get("users"), "id", Integer.toString(userId));
     }
 
@@ -167,7 +167,7 @@ public class DatabaseLogic {
         executeStatementUpdate(strSql);
     }
 
-    private void insertDataTickets(Ticket ticket) {
+    public void insertDataTickets(Ticket ticket) {
         String strSql = String.format("INSERT INTO %s " +
                 "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, reservationTime, userId) VALUES " +
                 "('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", tableNames.get("tickets"),

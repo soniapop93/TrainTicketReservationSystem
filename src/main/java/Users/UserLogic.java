@@ -44,6 +44,29 @@ public class UserLogic {
         return null;
     }
 
+    public User returnUser(int userId) {
+        ResultSet result = db.getUser(userId);
+
+        try {
+            while (result.next()) {
+                String userFirstName = result.getString("firstName");
+                String userLastName = result.getString("lastName");
+                String userDB = result.getString("username");
+                String passDB = result.getString("password");
+                String phoneNumber = result.getString("phoneNumber");
+
+                User user = new User(userId, userFirstName, userLastName, userDB, passDB, phoneNumber);
+
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
     public boolean getCredentialsForLoginFromUser() {
         System.out.print("Add username: ");
         String username = inputFromUser.getInputFromUser();
