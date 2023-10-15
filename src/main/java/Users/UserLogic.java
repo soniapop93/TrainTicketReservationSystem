@@ -10,6 +10,8 @@ public class UserLogic {
     private DatabaseLogic db;
     InputFromUser inputFromUser = new InputFromUser();
 
+    private User userAuthenticated;
+
     public UserLogic(DatabaseLogic db) {
         this.db = db;
     }
@@ -19,7 +21,6 @@ public class UserLogic {
         System.out.println("User registered");
     }
 
-    // Function that will get the user to be logged in, by username
     private User getUser(String username, String password){
         ResultSet result = db.getUserByUsername(username);
 
@@ -42,6 +43,10 @@ public class UserLogic {
         }
 
         return null;
+    }
+
+    public User returnAuthUser(){
+        return userAuthenticated;
     }
 
     public User returnUser(int userId) {
@@ -67,9 +72,10 @@ public class UserLogic {
         return null;
     }
 
-    public boolean getCredentialsForLoginFromUser() {
+    public boolean getCredentialsForLoginFromInput() {
         System.out.print("Add username: ");
         String username = inputFromUser.getInputFromUser();
+
 
         System.out.print("Add password: ");
         String password = inputFromUser.getInputFromUser();
@@ -78,7 +84,11 @@ public class UserLogic {
             User user = getUser(username, password);
 
             if (user != null) {
-                return checkIfPasswordIsCorrect(user, password);
+                if (checkIfPasswordIsCorrect(user, password)) {
+                    userAuthenticated = user;
+                    return true;
+                }
+                return false;
             }
         }
         return false;

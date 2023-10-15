@@ -13,7 +13,9 @@ public class LogicTrainTicketReservationSystem {
     private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList("See available train list", "Make a reservation", "Create new account", "Login in my account", "Logout", "Exit"));
     private boolean loggedIn = false;
 
+
     public void reservationSystem() {
+        User authUser = null;
         InputFromUser inputFromUser = new InputFromUser();
         DatabaseLogic databaseLogic = new DatabaseLogic();
         UserLogic userLogic = new UserLogic(databaseLogic);
@@ -45,12 +47,16 @@ public class LogicTrainTicketReservationSystem {
 
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
+
+
+
                         break;
 
                     case "3": // Logout
                         System.out.println(optionStrSelected + "3." + optionList.get(4) + "\n");
 
                         loggedIn = false;
+                        authUser = null;
 
                         System.out.println("Logged out");
                         break;
@@ -75,6 +81,9 @@ public class LogicTrainTicketReservationSystem {
 
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
+
+                        System.out.println("Please login or create new account before making any reservations");
+
                         break;
 
                     case "3": // Create new account
@@ -86,10 +95,13 @@ public class LogicTrainTicketReservationSystem {
                     case "4": // Login in my account
                         System.out.println(optionStrSelected + "4." + optionList.get(3) + "\n");
 
-                        loggedIn = userLogic.getCredentialsForLoginFromUser();
+                        loggedIn = userLogic.getCredentialsForLoginFromInput();
 
                         if (loggedIn) {
                             System.out.println("Logged in successfully");
+
+                            authUser = userLogic.returnAuthUser();
+
                         }
                         else {
                             System.out.println("Try again. Username or password is incorrect...");
