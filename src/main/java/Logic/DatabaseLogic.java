@@ -27,35 +27,18 @@ public class DatabaseLogic {
     private void createConnection(String fileName) {
         String strCon = String.format("jdbc:sqlite:%s.db", fileName);
 
-        try
-        {
+        try {
             connection = DriverManager.getConnection(strCon);
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
-//        finally
-//        {
-//            try
-//            {
-//                if (connection != null)
-//                {
-//                    connection.close();
-//                }
-//            }
-//            catch(SQLException e)
-//            {
-//                System.err.println(e.getMessage());
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     private void createTableUsers() {
         String strSql = String.format("CREATE TABLE IF NOT EXISTS %s " +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "admin BOOLEAN, " +
                 "firstName TEXT, " +
                 "lastName TEXT, " +
                 "username TEXT, " +

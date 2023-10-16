@@ -1,6 +1,8 @@
 package Logic;
 
+import Tickets.TicketLogic;
 import Trains.TrainLogic;
+import Users.AdminLogic;
 import Users.User;
 import Users.UserLogic;
 import Utilities.InputFromUser;
@@ -20,9 +22,13 @@ public class LogicTrainTicketReservationSystem {
         DatabaseLogic databaseLogic = new DatabaseLogic();
         UserLogic userLogic = new UserLogic(databaseLogic);
         TrainLogic trainLogic = new TrainLogic(databaseLogic);
+        TicketLogic ticketLogic = new TicketLogic(databaseLogic);
+        AdminLogic adminLogic = new AdminLogic(databaseLogic);
 
 
         String optionStrSelected = ">>> You have selected option: ";
+
+        adminLogic.showAdminMeniu(userLogic);
 
         printWelcomeMessage();
 
@@ -48,7 +54,10 @@ public class LogicTrainTicketReservationSystem {
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
 
+                        if (authUser != null) {
+                            ticketLogic.getReservationOptionsFromUser(authUser.getUserId());
 
+                        }
 
                         break;
 
@@ -83,12 +92,12 @@ public class LogicTrainTicketReservationSystem {
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
 
                         System.out.println("Please login or create new account before making any reservations");
-
+                        System.out.println("----------------");
                         break;
 
                     case "3": // Create new account
                         System.out.println(optionStrSelected + "3." + optionList.get(2) + "\n");
-                        userLogic.getNewUser();
+                        userLogic.getNewUser(false);
 
                         break;
 
@@ -114,7 +123,6 @@ public class LogicTrainTicketReservationSystem {
             }
         }
     }
-
 
 
     private void printWelcomeMessage() {

@@ -27,13 +27,14 @@ public class UserLogic {
         try {
             while (result.next()) {
                 int userId = result.getInt("id");
+                boolean admin = result.getBoolean("admin");
                 String userFirstName = result.getString("firstName");
                 String userLastName = result.getString("lastName");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
                 String phoneNumber = result.getString("phoneNumber");
 
-                User user = new User(userId, userFirstName, userLastName, userDB, passDB, phoneNumber);
+                User user = new User(userId, admin, userFirstName, userLastName, userDB, passDB, phoneNumber);
 
                 return user;
             }
@@ -54,13 +55,14 @@ public class UserLogic {
 
         try {
             while (result.next()) {
+                boolean admin = result.getBoolean("admin");
                 String userFirstName = result.getString("firstName");
                 String userLastName = result.getString("lastName");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
                 String phoneNumber = result.getString("phoneNumber");
 
-                User user = new User(userId, userFirstName, userLastName, userDB, passDB, phoneNumber);
+                User user = new User(userId, admin, userFirstName, userLastName, userDB, passDB, phoneNumber);
 
                 return user;
             }
@@ -94,7 +96,7 @@ public class UserLogic {
         return false;
     }
 
-    public void getNewUser() {
+    public void getNewUser(boolean admin) {
         System.out.print("Add First Name: ");
         String userFirstName = inputFromUser.getInputFromUser();
 
@@ -110,7 +112,7 @@ public class UserLogic {
         System.out.print("Add phoneNumber: ");
         String phoneNumber = inputFromUser.getInputFromUser();
 
-        User user = new User(-1, userFirstName, userLastName, username, password, phoneNumber);
+        User user = new User(-1, admin, userFirstName, userLastName, username, password, phoneNumber);
 
         addUser(user);
     }
