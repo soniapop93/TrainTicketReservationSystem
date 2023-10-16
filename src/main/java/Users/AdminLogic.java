@@ -3,22 +3,34 @@ package Users;
 import Logic.DatabaseLogic;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class AdminLogic {
 
     private DatabaseLogic db;
 
-    public AdminLogic(DatabaseLogic db) {this.db = db;}
+    public AdminLogic(DatabaseLogic db) {
+        this.db = db;
+        showAdminMeniu();
+    }
 
-    public void showAdminMeniu(UserLogic userLogic) {
+    private void showAdminMeniu()
+    {
+        ResultSet adminResult = db.getAdmin();
 
-        File file = new File ("./train_ticket_reservation_database.db");
-        if (!file.exists()) {
-            System.out.println("Hello admin user. Please add your credentials...");
+        try {
+            if (adminResult.next() == false) {
+                System.out.println("Hello admin user. Please add your credentials...");
 
-            userLogic.getNewUser(true);
+                UserLogic userLogic = new UserLogic(db);
 
-            System.out.println("Admin user registered successfully.");
+                userLogic.getNewUser(true);
+
+                System.out.println("Admin user registered successfully.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

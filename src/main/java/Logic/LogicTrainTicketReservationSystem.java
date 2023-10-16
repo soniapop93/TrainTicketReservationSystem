@@ -25,10 +25,9 @@ public class LogicTrainTicketReservationSystem {
         TicketLogic ticketLogic = new TicketLogic(databaseLogic);
         AdminLogic adminLogic = new AdminLogic(databaseLogic);
 
-
         String optionStrSelected = ">>> You have selected option: ";
 
-        adminLogic.showAdminMeniu(userLogic);
+
 
         printWelcomeMessage();
 

@@ -107,6 +107,10 @@ public class DatabaseLogic {
         return getResultByColumnName(tableNames.get("users"), "id", Integer.toString(userId));
     }
 
+    public ResultSet getAdmin() {
+        return getResultByColumnName(tableNames.get("users"), "admin", Boolean.toString(true));
+    }
+
     public ResultSet getUserByUsername(String username) {
         return getResultByColumnName(tableNames.get("users"), "username", username);
     }
