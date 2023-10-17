@@ -27,8 +27,6 @@ public class LogicTrainTicketReservationSystem {
 
         String optionStrSelected = ">>> You have selected option: ";
 
-
-
         printWelcomeMessage();
 
         while (true) {
@@ -37,7 +35,7 @@ public class LogicTrainTicketReservationSystem {
             String input = inputFromUser.getInputFromUser();
             System.out.println("-----------------------");
 
-            if (loggedIn) {
+            if (loggedIn && authUser.isAdmin() != true) {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
@@ -74,7 +72,7 @@ public class LogicTrainTicketReservationSystem {
                         return;
                 }
             }
-            else {
+            else if (loggedIn == false) {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
@@ -117,6 +115,40 @@ public class LogicTrainTicketReservationSystem {
                         break;
 
                     case "5": // Exit
+                        return;
+                }
+            }
+            else if (authUser.isAdmin()) {
+                switch (input) {
+                    default:
+                        System.out.println("Option not available");
+                        break;
+
+                    case "1": // See available train list
+                        System.out.println(optionStrSelected + "1." + optionList.get(0) + "\n");
+
+                        trainLogic.listTrains();
+
+                        break;
+
+                    case "2": // Add new train in database
+                        System.out.println(optionStrSelected + "2. Add new train in database\n");
+
+
+
+                        break;
+
+                    case "3": // Logout
+                        System.out.println(optionStrSelected + "3." + optionList.get(4) + "\n");
+
+                        loggedIn = false;
+                        authUser = null;
+
+                        System.out.println("Logged out");
+                        break;
+
+                    case "4": // Exit
+                        System.out.println(optionStrSelected + "4." + optionList.get(5) + "\n");
                         return;
                 }
             }

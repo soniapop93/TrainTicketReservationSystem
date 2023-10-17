@@ -147,9 +147,9 @@ public class DatabaseLogic {
 
     public void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
-                "(firstName, lastName, username, password, phoneNumber) VALUES " +
-                "('%s', '%s', '%s', '%s', '%s');", tableNames.get("users"),
-                user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
+                "(admin, firstName, lastName, username, password, phoneNumber) VALUES " +
+                "('%s', '%s', '%s', '%s', '%s', '%s');", tableNames.get("users"),
+                user.isAdmin(), user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
 
         executeStatementUpdate(strSql);
     }
