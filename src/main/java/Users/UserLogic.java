@@ -27,7 +27,7 @@ public class UserLogic {
         try {
             while (result.next()) {
                 int userId = result.getInt("id");
-                boolean admin = result.getBoolean("admin");
+                boolean admin = Boolean.parseBoolean(result.getString("admin"));
                 String userFirstName = result.getString("firstName");
                 String userLastName = result.getString("lastName");
                 String userDB = result.getString("username");

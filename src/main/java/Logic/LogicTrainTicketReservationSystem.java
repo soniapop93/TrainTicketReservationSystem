@@ -12,9 +12,8 @@ import java.util.Arrays;
 
 public class LogicTrainTicketReservationSystem {
 
-    private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList("See available train list", "Make a reservation", "Create new account", "Login in my account", "Logout", "Exit"));
+    private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList("See available train list", "Make a reservation", "Create new account", "Login in my account", "Logout", "Exit", "Add new train in database"));
     private boolean loggedIn = false;
-
 
     public void reservationSystem() {
         User authUser = null;
@@ -24,18 +23,29 @@ public class LogicTrainTicketReservationSystem {
         TrainLogic trainLogic = new TrainLogic(databaseLogic);
         TicketLogic ticketLogic = new TicketLogic(databaseLogic);
         AdminLogic adminLogic = new AdminLogic(databaseLogic);
+        boolean admin = false;
 
         String optionStrSelected = ">>> You have selected option: ";
 
         printWelcomeMessage();
 
         while (true) {
-            optionMenu(loggedIn);
+
+
+
+            if (authUser != null) {
+                admin = authUser.isAdmin();
+            }
+            else {
+                admin = false;
+            }
+
+            optionMenu(loggedIn, admin);
             System.out.print(">>> Add option number: ");
             String input = inputFromUser.getInputFromUser();
             System.out.println("-----------------------");
 
-            if (loggedIn && authUser.isAdmin() != true) {
+            if (loggedIn && admin == false) {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
@@ -72,7 +82,7 @@ public class LogicTrainTicketReservationSystem {
                         return;
                 }
             }
-            else if (loggedIn == false) {
+            else if (loggedIn == false && admin == false) {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
@@ -118,7 +128,7 @@ public class LogicTrainTicketReservationSystem {
                         return;
                 }
             }
-            else if (authUser.isAdmin()) {
+            else if (admin) {
                 switch (input) {
                     default:
                         System.out.println("Option not available");
@@ -132,7 +142,7 @@ public class LogicTrainTicketReservationSystem {
                         break;
 
                     case "2": // Add new train in database
-                        System.out.println(optionStrSelected + "2. Add new train in database\n");
+                        System.out.println(optionStrSelected + "2. " + optionList.get(6) +"\n");
 
 
 
@@ -162,13 +172,16 @@ public class LogicTrainTicketReservationSystem {
         System.out.println("==================================================");
         System.out.println(" ");
     }
-    private void optionMenu(boolean loggedIn) {
+    private void optionMenu(boolean loggedIn, boolean admin) {
         String menuString = "";
 
         System.out.println("Please select one of the options: ");
 
-        if (loggedIn) {
+        if (loggedIn && admin == false) {
             menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(4) + "\n4. " + optionList.get(5);
+        }
+        else if (admin) {
+            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(6) + "\n3. " + optionList.get(4) + "\n4. " + optionList.get(5);
         }
         else {
             menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(2) + "\n4. " + optionList.get(3) + "\n5. " + optionList.get(5);

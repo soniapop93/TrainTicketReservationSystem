@@ -1,6 +1,7 @@
 package Users;
 
 import Logic.DatabaseLogic;
+import Trains.TrainLogic;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -32,5 +33,11 @@ public class AdminLogic {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getInputFromAdminAddTrain() {
+        TrainLogic train = new TrainLogic(db);
+
+        System.out.println("Add Departure Location:");
     }
 }
