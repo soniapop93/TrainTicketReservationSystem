@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -15,8 +16,8 @@ public class Train {
     private int seatsTotal;
     private double price;
     private double distance;
-    private LocalDateTime timeOfDeparture;
-    private LocalDateTime estimatedTimeOfArrival;
+    private LocalTime timeOfDeparture;
+    private LocalTime estimatedTimeOfArrival;
 
 
     public Train(
@@ -27,8 +28,8 @@ public class Train {
             int seatsTotal,
             double price,
             double distance,
-            LocalDateTime timeOfDeparture,
-            LocalDateTime estimatedTimeOfArrival) {
+            LocalTime timeOfDeparture,
+            LocalTime estimatedTimeOfArrival) {
         this.trainId = trainId;
         this.departureLocation = departureLocation;
         this.arrivalLocation = arrivalLocation;

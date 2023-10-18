@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UserLogic {
     private DatabaseLogic db;
-    InputFromUser inputFromUser = new InputFromUser();
+    private InputFromUser inputFromUser = new InputFromUser();
 
     private User userAuthenticated;
 

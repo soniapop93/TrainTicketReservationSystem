@@ -5,6 +5,7 @@ import Logic.DatabaseLogic;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TrainLogic {
     private DatabaseLogic db;
@@ -24,8 +25,8 @@ public class TrainLogic {
                 int seatsTotal = result.getInt("seatsTotal");
                 double price = result.getDouble("price");
                 double distance = result.getDouble("distance");
-                LocalDateTime timeOfDeparture = LocalDateTime.parse(result.getString("timeOfDeparture"));
-                LocalDateTime estimatedTimeOfArrival = LocalDateTime.parse(result.getString("estimatedTimeOfArrival"));
+                LocalTime timeOfDeparture = LocalTime.parse(result.getString("timeOfDeparture"));
+                LocalTime estimatedTimeOfArrival = LocalTime.parse(result.getString("estimatedTimeOfArrival"));
 
 
                 Train train = new Train(
@@ -63,8 +64,8 @@ public class TrainLogic {
                 int seatsTotal = trainResult.getInt("seatsTotal");
                 double price = trainResult.getDouble("price");
                 double distance = trainResult.getDouble("distance");
-                LocalDateTime timeOfDeparture = LocalDateTime.parse(trainResult.getString("timeOfDeparture"));
-                LocalDateTime estimatedTimeOfArrival = LocalDateTime.parse(trainResult.getString("estimatedTimeOfArrival"));
+                LocalTime timeOfDeparture = LocalTime.parse(trainResult.getString("timeOfDeparture"));
+                LocalTime estimatedTimeOfArrival = LocalTime.parse(trainResult.getString("estimatedTimeOfArrival"));
 
 
                 Train train = new Train(
@@ -93,8 +94,9 @@ public class TrainLogic {
                         "Departure Location: %s | " +
                         "Arrival Location: %s | " +
                         "Seats Available: %s | " +
-                        "Price: %s | " +
-                        "Distance: %s | " +
+                        "Total number of seats: %s | " +
+                        "Price: %s € | " +
+                        "Distance: %s KM | " +
                         "Time of Departure: %s | " +
                         "Estimated time of Arrival: %s",
                 train.getTrainId(),

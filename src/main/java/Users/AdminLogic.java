@@ -1,15 +1,18 @@
 package Users;
 
 import Logic.DatabaseLogic;
+import Trains.Train;
 import Trains.TrainLogic;
+import Utilities.InputFromUser;
 
-import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 
 public class AdminLogic {
 
     private DatabaseLogic db;
+    private InputFromUser inputFromUser = new InputFromUser();
 
     public AdminLogic(DatabaseLogic db) {
         this.db = db;
@@ -36,8 +39,33 @@ public class AdminLogic {
     }
 
     public void getInputFromAdminAddTrain() {
-        TrainLogic train = new TrainLogic(db);
+        TrainLogic trainLogic = new TrainLogic(db);
 
-        System.out.println("Add Departure Location:");
+        System.out.print("Add Departure Location: ");
+        String departureLocation = inputFromUser.getInputFromUser();
+
+        System.out.print("Add Arrival Location: ");
+        String arrivalLocation = inputFromUser.getInputFromUser();
+
+        System.out.print("Add Total Number of seats: ");
+        int totalSeatsNumber = Integer.parseInt(inputFromUser.getInputFromUser());
+
+        System.out.print("Add Distance: ");
+        double distance = Double.parseDouble(inputFromUser.getInputFromUser());
+
+        System.out.print("Add Time of Departure: ");
+        LocalTime timeOfDeparture = LocalTime.parse(inputFromUser.getInputFromUser());
+
+        System.out.print("Add Time of Arrival: ");
+        LocalTime estimatedTimeOfArrival = LocalTime.parse(inputFromUser.getInputFromUser());
+
+        int seatsAvailable = totalSeatsNumber;
+
+        double price = 5 * distance;
+
+        Train train = new Train(-1, departureLocation, arrivalLocation, seatsAvailable, totalSeatsNumber, price, distance, timeOfDeparture, estimatedTimeOfArrival);
+
+        trainLogic.addTrain(train);
+        System.out.println("Train successfully added in database");
     }
 }

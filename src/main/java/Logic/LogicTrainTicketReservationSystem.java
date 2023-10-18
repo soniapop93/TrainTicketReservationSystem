@@ -143,8 +143,7 @@ public class LogicTrainTicketReservationSystem {
 
                     case "2": // Add new train in database
                         System.out.println(optionStrSelected + "2. " + optionList.get(6) +"\n");
-
-
+                        adminLogic.getInputFromAdminAddTrain();
 
                         break;
 

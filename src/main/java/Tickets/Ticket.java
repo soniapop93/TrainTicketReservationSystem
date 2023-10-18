@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -16,8 +17,8 @@ public class Ticket
     private String arrivalLocation;
     private int seatNumber;
     private double price;
-    private LocalDateTime timeOfDeparture;
-    private LocalDateTime estimatedTimeOfArrival;
+    private LocalTime timeOfDeparture;
+    private LocalTime estimatedTimeOfArrival;
     private boolean refundable;
     private LocalDateTime reservationTime;
     private User user;
@@ -29,8 +30,8 @@ public class Ticket
             String arrivalLocation,
             int seatNumber,
             double price,
-            LocalDateTime timeOfDeparture,
-            LocalDateTime estimatedTimeOfArrival,
+            LocalTime timeOfDeparture,
+            LocalTime estimatedTimeOfArrival,
             boolean refundable,
             LocalDateTime reservationTime,
             User user) {

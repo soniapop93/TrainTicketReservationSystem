@@ -5,6 +5,7 @@ import Trains.Train;
 import Users.User;
 
 import java.sql.*;
+import java.time.LocalTime;
 import java.util.Map;
 
 public class DatabaseLogic {
@@ -74,8 +75,8 @@ public class DatabaseLogic {
                 "seatsTotal INTEGER, " +
                 "price DOUBLE, " +
                 "distance DOUBLE, " +
-                "timeOfDeparture DATETIME, " +
-                "estimatedTimeOfArrival DATETIME);", tableNames.get("trains"));
+                "timeOfDeparture TEXT, " +
+                "estimatedTimeOfArrival TEXT);", tableNames.get("trains"));
         executeStatementUpdate(strSql);
     }
 
@@ -181,8 +182,8 @@ public class DatabaseLogic {
                 train.getSeatsTotal(),
                 train.getPrice(),
                 train.getDistance(),
-                train.getTimeOfDeparture(),
-                train.getEstimatedTimeOfArrival());
+                train.getTimeOfDeparture().toString(),
+                train.getEstimatedTimeOfArrival().toString());
 
         executeStatementUpdate(strSql);
     }
