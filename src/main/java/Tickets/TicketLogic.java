@@ -17,13 +17,21 @@ public class TicketLogic {
         this.db = db;
     }
 
-    private Ticket makeReservation (int userId, int trainId) {
+    private Ticket makeReservation (int userId, int trainId, int seatsNumber) {
         TrainLogic trainLogic = new TrainLogic(db);
         UserLogic userLogic = new UserLogic(db);
 
         Train train = trainLogic.getTrain(trainId);
         User user = userLogic.returnUser(userId);
 
+        int newAvailableSeatsInTrain = train.getSeatsAvailable() - seatsNumber;
+
+        if (newAvailableSeatsInTrain < 0) {
+            System.out.println("There are no more seats available in this train");
+            return null;
+        }
+
+        db.updateSeatsNumberInTrains(newAvailableSeatsInTrain, train.getTrainId());
 
         if (train != null) {
             Ticket ticket = new Ticket(
@@ -31,10 +39,10 @@ public class TicketLogic {
                     train.getTrainId(),
                     train.getDepartureLocation(),
                     train.getArrivalLocation(),
-                    train.getSeatsTotal() - train.getSeatsAvailable(), //todo: implement seats in db
-                    train.getPrice(), //todo: implelemet price in train db
-                    train.getTimeOfDeparture(), //todo: impplement timeofdeparture in train db
-                    train.getEstimatedTimeOfArrival(), //todo: implement estimated time of arrival in train db
+                    seatsNumber,
+                    train.getPrice(),
+                    train.getTimeOfDeparture(),
+                    train.getEstimatedTimeOfArrival(),
                     true,
                     LocalDateTime.now(),
                     user);
@@ -53,9 +61,13 @@ public class TicketLogic {
         try {
             int trainId = Integer.parseInt(inputFromUser.getInputFromUser());
 
-            if (trainId > 0) {
 
-                Ticket ticket = makeReservation(userId, trainId);
+            System.out.print("Please enter the number of seats you want to reserve: ");
+            int seatsNumber = Integer.parseInt(inputFromUser.getInputFromUser());
+
+            if (trainId > 0 && seatsNumber > 0) {
+
+                Ticket ticket = makeReservation(userId, trainId, seatsNumber);
 
                 if (ticket != null) {
                     db.insertDataTickets(ticket);

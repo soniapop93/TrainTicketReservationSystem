@@ -188,4 +188,9 @@ public class DatabaseLogic {
         executeStatementUpdate(strSql);
     }
 
+    public void updateSeatsNumberInTrains(int seatsNumber, int trainId) {
+        String strSql = String.format("UPDATE %s SET %s=%s WHERE id=%s", tableNames.get("trains"), "seatsAvailable", seatsNumber, trainId);
+
+        executeStatementUpdate(strSql);
+    }
 }

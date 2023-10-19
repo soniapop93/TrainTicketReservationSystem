@@ -117,7 +117,6 @@ public class LogicTrainTicketReservationSystem {
                             System.out.println("Logged in successfully");
 
                             authUser = userLogic.returnAuthUser();
-
                         }
                         else {
                             System.out.println("Try again. Username or password is incorrect...");

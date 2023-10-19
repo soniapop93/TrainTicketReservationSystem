@@ -12,13 +12,13 @@ public class Main
         Requirements:
         [X] - show trains available
 		[X] - user should select the train which he wants to make a reservation for
-		[ ] - should select the number of seats (show also how many seats are available), the date for reservation and the location
+		[X] - should select the number of seats (show also how many seats are available), generate the date for reservation
         [X] - user should log in
         [X] - if user doesn't have an account, should create one
 		[ ] - reserve seat and send confirmation of the reservation through mail
 		[X] - user can log out
 		[X] - when app is first time started, show menu to create an admin user
-		[ ] - identify if the user is admin, and if yes show option to add trains in database
+		[X] - identify if the user is admin, and if yes show option to add trains in database
          */
 
         LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
