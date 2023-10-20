@@ -27,7 +27,7 @@ public class TicketLogic {
         int newAvailableSeatsInTrain = train.getSeatsAvailable() - seatsNumber;
 
         if (newAvailableSeatsInTrain < 0) {
-            System.out.println("There are no more seats available in this train");
+            System.out.println(">> There are no more seats available in this train");
             return null;
         }
 
@@ -71,7 +71,7 @@ public class TicketLogic {
 
                 if (ticket != null) {
                     db.insertDataTickets(ticket);
-                    System.out.println("Reservation ticket generated successfully");
+                    System.out.println(">> Reservation ticket generated successfully");
                 }
             }
 
@@ -80,4 +80,16 @@ public class TicketLogic {
             e.printStackTrace();
         }
     }
+
+    public void getReservedTicketsForUser(int userId) {
+        ResultSet result = db.getTicketsByUserId(userId);
+
+        try {
+            while (result.next()) {
+                //todo: finish it
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 }

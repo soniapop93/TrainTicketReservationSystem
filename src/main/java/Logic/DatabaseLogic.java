@@ -120,7 +120,7 @@ public class DatabaseLogic {
         return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(ticketId));
     }
 
-    private ResultSet getTicketsByUserId(int userId) {
+    public ResultSet getTicketsByUserId(int userId) {
         return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(userId));
     }
 

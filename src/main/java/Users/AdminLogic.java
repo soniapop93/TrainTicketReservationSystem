@@ -25,13 +25,13 @@ public class AdminLogic {
 
         try {
             if (adminResult.next() == false) {
-                System.out.println("Hello admin user. Please add your credentials...");
+                System.out.println(">> Hello admin user. Please add your credentials...");
 
                 UserLogic userLogic = new UserLogic(db);
 
                 userLogic.getNewUser(true);
 
-                System.out.println("Admin user registered successfully.");
+                System.out.println(">> Admin user registered successfully.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,6 +66,6 @@ public class AdminLogic {
         Train train = new Train(-1, departureLocation, arrivalLocation, seatsAvailable, totalSeatsNumber, price, distance, timeOfDeparture, estimatedTimeOfArrival);
 
         trainLogic.addTrain(train);
-        System.out.println("Train successfully added in database");
+        System.out.println(">> Train successfully added in database");
     }
 }

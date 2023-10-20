@@ -12,7 +12,15 @@ import java.util.Arrays;
 
 public class LogicTrainTicketReservationSystem {
 
-    private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList("See available train list", "Make a reservation", "Create new account", "Login in my account", "Logout", "Exit", "Add new train in database"));
+    private final ArrayList<String> optionList = new ArrayList<String>(Arrays.asList(
+            "See available train list",
+            "Make a reservation",
+            "Create new account",
+            "Login in my account",
+            "Logout",
+            "Exit",
+            "Add new train in database",
+            "Show reserved tickets"));
     private boolean loggedIn = false;
 
     public void reservationSystem() {
@@ -30,9 +38,6 @@ public class LogicTrainTicketReservationSystem {
         printWelcomeMessage();
 
         while (true) {
-
-
-
             if (authUser != null) {
                 admin = authUser.isAdmin();
             }
@@ -63,9 +68,7 @@ public class LogicTrainTicketReservationSystem {
 
                         if (authUser != null) {
                             ticketLogic.getReservationOptionsFromUser(authUser.getUserId());
-
                         }
-
                         break;
 
                     case "3": // Logout
@@ -76,16 +79,22 @@ public class LogicTrainTicketReservationSystem {
 
                         System.out.println("Logged out");
                         break;
+                    case "4": //Show reserved tickets
+                        System.out.println(optionStrSelected + "4." + optionList.get(7) + "\n");
 
-                    case "4": // Exit
-                        System.out.println(optionStrSelected + "4." + optionList.get(5) + "\n");
+                        ticketLogic.getReservedTicketsForUser(authUser.getUserId());
+
+                        break;
+
+                    case "5": // Exit
+                        System.out.println(optionStrSelected + "5." + optionList.get(5) + "\n");
                         return;
                 }
             }
             else if (loggedIn == false && admin == false) {
                 switch (input) {
                     default:
-                        System.out.println("Option not available");
+                        System.out.println(">> Option not available");
                         break;
 
                     case "1": // See available train list
@@ -98,7 +107,7 @@ public class LogicTrainTicketReservationSystem {
                     case "2": // Make a reservation
                         System.out.println(optionStrSelected + "2." + optionList.get(1) + "\n");
 
-                        System.out.println("Please login or create new account before making any reservations");
+                        System.out.println(">> Please login or create new account before making any reservations");
                         System.out.println("----------------");
                         break;
 
@@ -114,12 +123,12 @@ public class LogicTrainTicketReservationSystem {
                         loggedIn = userLogic.getCredentialsForLoginFromInput();
 
                         if (loggedIn) {
-                            System.out.println("Logged in successfully");
+                            System.out.println(">> Logged in successfully");
 
                             authUser = userLogic.returnAuthUser();
                         }
                         else {
-                            System.out.println("Try again. Username or password is incorrect...");
+                            System.out.println(">> Try again. Username or password is incorrect...");
                         }
                         break;
 
@@ -130,7 +139,7 @@ public class LogicTrainTicketReservationSystem {
             else if (admin) {
                 switch (input) {
                     default:
-                        System.out.println("Option not available");
+                        System.out.println(">> Option not available");
                         break;
 
                     case "1": // See available train list
@@ -152,7 +161,7 @@ public class LogicTrainTicketReservationSystem {
                         loggedIn = false;
                         authUser = null;
 
-                        System.out.println("Logged out");
+                        System.out.println(">> Logged out");
                         break;
 
                     case "4": // Exit
@@ -173,7 +182,7 @@ public class LogicTrainTicketReservationSystem {
     private void optionMenu(boolean loggedIn, boolean admin) {
         String menuString = "";
 
-        System.out.println("Please select one of the options: ");
+        System.out.println(">> Please select one of the options: ");
 
         if (loggedIn && admin == false) {
             menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(4) + "\n4. " + optionList.get(5);
