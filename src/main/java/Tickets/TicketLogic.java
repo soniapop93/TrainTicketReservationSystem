@@ -9,6 +9,7 @@ import Utilities.InputFromUser;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TicketLogic {
     private DatabaseLogic db;
@@ -46,6 +47,8 @@ public class TicketLogic {
                     true,
                     LocalDateTime.now(),
                     user);
+
+            // todo: implement to add in database the generated ticket
 
             return ticket;
         }
@@ -86,6 +89,18 @@ public class TicketLogic {
 
         try {
             while (result.next()) {
+                int ticketId =  result.getInt("id");
+                int trainId =  result.getInt("trainId");
+                String departureLocation = result.getString("departureLocation");
+                String arrivalLocation = result.getString("arrivalLocation");
+                int seatNumber = result.getInt("seatNumber");
+                double price = result.getDouble("price");
+                LocalTime timeOfDeparture = LocalTime.parse(result.getString("timeOfDeparture"));
+                LocalTime estimatedTimeOfArrival = LocalTime.parse(result.getString("estimatedTimeOfArrival"));
+                boolean refundable = result.getBoolean("refundable");
+                LocalTime reservationTime = LocalTime.parse(result.getString("reservationTime"));
+                int userIdDB = result.getInt("userId");
+
                 //todo: finish it
             }
 
