@@ -21,7 +21,7 @@ public class Ticket
     private LocalTime estimatedTimeOfArrival;
     private boolean refundable;
     private LocalDateTime reservationTime;
-    private User user;
+    private int userId;
 
     public Ticket(
             int ticketId,
@@ -34,7 +34,7 @@ public class Ticket
             LocalTime estimatedTimeOfArrival,
             boolean refundable,
             LocalDateTime reservationTime,
-            User user) {
+            int userId) {
         this.ticketId = ticketId;
         this.trainId = trainId;
         this.departureLocation = departureLocation;
@@ -45,6 +45,6 @@ public class Ticket
         this.estimatedTimeOfArrival = estimatedTimeOfArrival;
         this.reservationTime = reservationTime;
         this.refundable = refundable;
-        this.user = user;
+        this.userId = userId;
     }
 }

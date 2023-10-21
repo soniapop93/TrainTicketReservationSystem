@@ -46,7 +46,7 @@ public class TicketLogic {
                     train.getEstimatedTimeOfArrival(),
                     true,
                     LocalDateTime.now(),
-                    user);
+                    userId);
 
             // todo: implement to add in database the generated ticket
 
@@ -98,13 +98,47 @@ public class TicketLogic {
                 LocalTime timeOfDeparture = LocalTime.parse(result.getString("timeOfDeparture"));
                 LocalTime estimatedTimeOfArrival = LocalTime.parse(result.getString("estimatedTimeOfArrival"));
                 boolean refundable = result.getBoolean("refundable");
-                LocalTime reservationTime = LocalTime.parse(result.getString("reservationTime"));
+                LocalDateTime reservationTime = LocalDateTime.parse(result.getString("reservationTime"));
                 int userIdDB = result.getInt("userId");
 
-                //todo: finish it
+                Ticket ticket = new Ticket(ticketId, trainId, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, reservationTime, userIdDB);
+
+                printTicket(ticket);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void printTicket(Ticket ticket) {
+        String ticketStr = String.format("--> " +
+                        "Ticket id: %s | " +
+                        "Train id: %s | " +
+                        "Departure Location: %s | " +
+                        "Arrival Location: %s | " +
+                        "Number of seats reserved: %s | " +
+                        "Price: %s | " +
+                        "Time of Departure: %s | " +
+                        "Estimated time of arrival: %s | " +
+                        "Reservation time: %s | " +
+                        "Refundable: %s |" +
+                        "User id: %s",
+                ticket.getTicketId(),
+                ticket.getTrainId(),
+                ticket.getDepartureLocation(),
+                ticket.getArrivalLocation(),
+                ticket.getSeatNumber(),
+                ticket.getPrice(),
+                ticket.getTimeOfDeparture(),
+                ticket.getEstimatedTimeOfArrival(),
+                ticket.getReservationTime(),
+                ticket.isRefundable(),
+                ticket.getTicketId());
+
+        System.out.println(ticketStr);
+    }
 }
+
+
+
