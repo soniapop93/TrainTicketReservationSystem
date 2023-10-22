@@ -185,13 +185,16 @@ public class LogicTrainTicketReservationSystem {
         System.out.println(">> Please select one of the options: ");
 
         if (loggedIn && admin == false) {
-            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(4) + "\n4. " + optionList.get(5);
+            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(4) +
+                    "\n4. " + optionList.get(7) +  "\n5. " + optionList.get(5);
         }
         else if (admin) {
-            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(6) + "\n3. " + optionList.get(4) + "\n4. " + optionList.get(5);
+            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(6) + "\n3. " + optionList.get(4) +
+                    "\n4. " + optionList.get(5);
         }
         else {
-            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(2) + "\n4. " + optionList.get(3) + "\n5. " + optionList.get(5);
+            menuString = "1. " + optionList.get(0) + "\n2. " + optionList.get(1) + "\n3. " + optionList.get(2) +
+                    "\n4. " + optionList.get(3) + "\n5. " + optionList.get(5);
         }
 
         System.out.println(menuString);

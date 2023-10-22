@@ -48,8 +48,6 @@ public class TicketLogic {
                     LocalDateTime.now(),
                     userId);
 
-            // todo: implement to add in database the generated ticket
-
             return ticket;
         }
 

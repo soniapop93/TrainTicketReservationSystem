@@ -121,7 +121,7 @@ public class DatabaseLogic {
     }
 
     public ResultSet getTicketsByUserId(int userId) {
-        return getResultByColumnName(tableNames.get("tickets"), "id", Integer.toString(userId));
+        return getResultByColumnName(tableNames.get("tickets"), "userId", Integer.toString(userId));
     }
 
     public ResultSet getTrainById(int trainId) {
@@ -157,9 +157,28 @@ public class DatabaseLogic {
 
     public void insertDataTickets(Ticket ticket) {
         String strSql = String.format("INSERT INTO %s " +
-                "(trainID, departureLocation, arrivalLocation, seatNumber, price, timeOfDeparture, estimatedTimeOfArrival, refundable, reservationTime, userId) VALUES " +
+                "(" +
+                        "trainID, " +
+                        "departureLocation, " +
+                        "arrivalLocation, " +
+                        "seatNumber, " +
+                        "price, " +
+                        "timeOfDeparture, " +
+                        "estimatedTimeOfArrival, " +
+                        "refundable, " +
+                        "reservationTime, " +
+                        "userId) VALUES " +
                 "('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');", tableNames.get("tickets"),
-                ticket.getTrainId(), ticket.getDepartureLocation(), ticket.getArrivalLocation(), ticket.getSeatNumber(), ticket.getPrice(), ticket.getTimeOfDeparture(), ticket.getEstimatedTimeOfArrival(), ticket.isRefundable(), ticket.getReservationTime(), ticket.getUserId());
+                ticket.getTrainId(),
+                ticket.getDepartureLocation(),
+                ticket.getArrivalLocation(),
+                ticket.getSeatNumber(),
+                ticket.getPrice(),
+                ticket.getTimeOfDeparture(),
+                ticket.getEstimatedTimeOfArrival(),
+                ticket.isRefundable(),
+                ticket.getReservationTime(),
+                ticket.getUserId());
 
         executeStatementUpdate(strSql);
     }
