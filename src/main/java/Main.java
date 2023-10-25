@@ -2,6 +2,10 @@ import Logic.DatabaseLogic;
 import Logic.LogicTrainTicketReservationSystem;
 import Trains.Train;
 import Trains.TrainLogic;
+import Utilities.Mail;
+import Utilities.SendMail;
+import Utilities.WinCred;
+import Utilities.WindowsCredentials;
 
 public class Main
 {
@@ -21,14 +25,28 @@ public class Main
 		[X] - identify if the user is admin, and if yes show option to add trains in database
          */
 
-        LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
-        logic.reservationSystem();
+        //LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
+        //logic.reservationSystem();
 
         //DatabaseLogic dbLogic = new DatabaseLogic();
 
         //TrainLogic trainLogic = new TrainLogic(dbLogic);
 
         //trainLogic.listTrains();
+
+        WindowsCredentials winCredentials = new WindowsCredentials();
+
+        WinCred.WinCredential credentialMail = winCredentials.getCredentials();
+
+
+        SendMail sendmail = new SendMail(credentialMail);
+
+        Mail mail = new Mail(
+                "",
+                "",
+                "Testing",
+                "This is a test");
+        sendmail.send(mail);
 
     }
 }

@@ -10,21 +10,25 @@ import java.util.Properties;
 
 public class SendMail {
 
-    private static final String USERNAME = "";
-    private static final String PASSWORD = "";
+    private WinCred.WinCredential credential;
+
+    public SendMail(WinCred.WinCredential credential) {
+        this.credential = credential;
+    }
 
     public void send(Mail mail) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.mailtrap.io");
-        properties.put("mail.smtp.port", "25");
+        //properties.put("mail.smtp.host", "sandbox.smtp.mailtrap.io");
+        properties.put("mail.smtp.port", "2525");
         properties.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USERNAME, PASSWORD);
+                return new PasswordAuthentication(credential.username, credential.password);
             }
         });
 

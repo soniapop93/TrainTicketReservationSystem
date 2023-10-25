@@ -14,6 +14,7 @@ public class User
     private boolean admin;
     private String userFirstName;
     private String userLastName;
+    private String email;
     private String username;
     private String password;
     private String phoneNumber;
@@ -23,6 +24,7 @@ public class User
             boolean admin,
             String userFirstName,
             String userLastName,
+            String email,
             String username,
             String password,
             String phoneNumber) {
@@ -30,6 +32,7 @@ public class User
         this.admin = admin;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
+        this.email = email;
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;

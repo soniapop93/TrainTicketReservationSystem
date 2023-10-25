@@ -42,6 +42,7 @@ public class DatabaseLogic {
                 "admin BOOLEAN, " +
                 "firstName TEXT, " +
                 "lastName TEXT, " +
+                "email TEXT," +
                 "username TEXT, " +
                 "password TEXT, " +
                 "phoneNumber TEXT);", tableNames.get("users"));
@@ -148,9 +149,15 @@ public class DatabaseLogic {
 
     public void insertDataUsers(User user) {
         String strSql = String.format("INSERT INTO %s " +
-                "(admin, firstName, lastName, username, password, phoneNumber) VALUES " +
-                "('%s', '%s', '%s', '%s', '%s', '%s');", tableNames.get("users"),
-                user.isAdmin(), user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getPassword(), user.getPhoneNumber());
+                "(admin, firstName, lastName, email, username, password, phoneNumber) VALUES " +
+                "('%s', '%s', '%s', '%s','%s', '%s', '%s');", tableNames.get("users"),
+                user.isAdmin(),
+                user.getUserFirstName(),
+                user.getUserLastName(),
+                user.getEmail(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getPhoneNumber());
 
         executeStatementUpdate(strSql);
     }

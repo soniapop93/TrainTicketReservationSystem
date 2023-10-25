@@ -30,11 +30,20 @@ public class UserLogic {
                 boolean admin = Boolean.parseBoolean(result.getString("admin"));
                 String userFirstName = result.getString("firstName");
                 String userLastName = result.getString("lastName");
+                String email = result.getString("email");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
                 String phoneNumber = result.getString("phoneNumber");
 
-                User user = new User(userId, admin, userFirstName, userLastName, userDB, passDB, phoneNumber);
+                User user = new User(
+                        userId,
+                        admin,
+                        userFirstName,
+                        userLastName,
+                        email,
+                        userDB,
+                        passDB,
+                        phoneNumber);
 
                 return user;
             }
@@ -58,11 +67,20 @@ public class UserLogic {
                 boolean admin = result.getBoolean("admin");
                 String userFirstName = result.getString("firstName");
                 String userLastName = result.getString("lastName");
+                String email = result.getString("email");
                 String userDB = result.getString("username");
                 String passDB = result.getString("password");
                 String phoneNumber = result.getString("phoneNumber");
 
-                User user = new User(userId, admin, userFirstName, userLastName, userDB, passDB, phoneNumber);
+                User user = new User(
+                        userId,
+                        admin,
+                        userFirstName,
+                        userLastName,
+                        email,
+                        userDB,
+                        passDB,
+                        phoneNumber);
 
                 return user;
             }
@@ -103,6 +121,9 @@ public class UserLogic {
         System.out.print("Add Last Name: ");
         String userLastName = inputFromUser.getInputFromUser();
 
+        System.out.print("Add email address: ");
+        String email = inputFromUser.getInputFromUser();
+
         System.out.print("Add username: ");
         String username = inputFromUser.getInputFromUser();
 
@@ -112,7 +133,15 @@ public class UserLogic {
         System.out.print("Add phoneNumber: ");
         String phoneNumber = inputFromUser.getInputFromUser();
 
-        User user = new User(-1, admin, userFirstName, userLastName, username, password, phoneNumber);
+        User user = new User(
+                -1,
+                admin,
+                userFirstName,
+                userLastName,
+                email,
+                username,
+                password,
+                phoneNumber);
 
         addUser(user);
     }
