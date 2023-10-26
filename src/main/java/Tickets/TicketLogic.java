@@ -5,7 +5,7 @@ import Trains.Train;
 import Trains.TrainLogic;
 import Users.User;
 import Users.UserLogic;
-import Utilities.InputFromUser;
+import Utilities.*;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -47,6 +47,20 @@ public class TicketLogic {
                     true,
                     LocalDateTime.now(),
                     userId);
+
+            WindowsCredentials winCredentials = new WindowsCredentials();
+            WinCred.WinCredential credentialMail = winCredentials.getCredentials();
+
+            SendMail sendmail = new SendMail(credentialMail);
+
+            String mailText = mailTicketText(ticket);
+
+            Mail mail = new Mail(
+                    "test@test.com",
+                    user.getEmail(),
+                    "Reservation with id: " + ticket.getTicketId(),
+                    mailText);
+            sendmail.send(mail);
 
             return ticket;
         }
@@ -131,10 +145,40 @@ public class TicketLogic {
                 ticket.getTimeOfDeparture(),
                 ticket.getEstimatedTimeOfArrival(),
                 ticket.getReservationTime(),
-                ticket.isRefundable(),
+                ticket.isRefundable() ? "Yes" : "No",
                 ticket.getTicketId());
 
         System.out.println(ticketStr);
+    }
+
+    private String mailTicketText(Ticket ticket) {
+        String text = String.format("Hi, \n" +
+                "Here is your ticket: \n" +
+                        "Ticket id: %s\n" +
+                        "Train id: %s\n" +
+                        "Departure Location: %s\n" +
+                        "Arrival Location: %s\n" +
+                        "Seats: %s\n" +
+                        "Price: %s\n" +
+                        "Time of Departure: %s\n" +
+                        "Estimated time of arrival: %s\n" +
+                        "Ticket is refundable? %s\n" +
+                        "Reservation time: %s\n" +
+                        "Ticket id: %s\n\n" +
+                        "Thank you!",
+                ticket.getTicketId(),
+                ticket.getTrainId(),
+                ticket.getDepartureLocation(),
+                ticket.getArrivalLocation(),
+                ticket.getSeatNumber(),
+                ticket.getPrice(),
+                ticket.getTimeOfDeparture(),
+                ticket.getEstimatedTimeOfArrival(),
+                ticket.isRefundable() ? "Yes" : "No",
+                ticket.getReservationTime(),
+                ticket.getUserId());
+
+        return text;
     }
 }
 
