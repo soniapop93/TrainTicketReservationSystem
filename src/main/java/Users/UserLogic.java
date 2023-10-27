@@ -5,6 +5,8 @@ import Utilities.InputFromUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserLogic {
     private DatabaseLogic db;
@@ -121,8 +123,15 @@ public class UserLogic {
         System.out.print("Add Last Name: ");
         String userLastName = inputFromUser.getInputFromUser();
 
-        System.out.print("Add email address: ");
-        String email = inputFromUser.getInputFromUser();
+        boolean mailInPattern = false;
+        String email = "";
+
+        while (!mailInPattern) {
+            System.out.print("Add email address: ");
+            email = inputFromUser.getInputFromUser();
+
+            mailInPattern = checkEmailPattern(email);
+        }
 
         System.out.print("Add username: ");
         String username = inputFromUser.getInputFromUser();
@@ -130,8 +139,15 @@ public class UserLogic {
         System.out.print("Add password: ");
         String password = inputFromUser.getInputFromUser();
 
-        System.out.print("Add phoneNumber: ");
-        String phoneNumber = inputFromUser.getInputFromUser();
+        boolean phoneNumberInPattern = false;
+        String phoneNumber = "";
+
+        while (!phoneNumberInPattern) {
+            System.out.print("Add phoneNumber: ");
+            phoneNumber = inputFromUser.getInputFromUser();
+
+            phoneNumberInPattern = checkPhoneNumberPattern(phoneNumber);
+        }
 
         User user = new User(
                 -1,
@@ -148,5 +164,30 @@ public class UserLogic {
 
     private boolean checkIfPasswordIsCorrect(User user, String password) {
         return user.getPassword().equals(password);
+    }
+
+    private boolean checkEmailPattern(String emailAddress) {
+        if (!emailAddress.contains("@")) {
+            return false;
+        }
+
+        String regexPattern = "^(.+)@(\\S+)$";
+        return regexMatchFound(emailAddress ,regexPattern);
+    }
+
+    private boolean checkPhoneNumberPattern(String phoneNumber) {
+        String regexPattern = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+        return regexMatchFound(phoneNumber ,regexPattern);
+    }
+
+    private boolean regexMatchFound (String input, String regexPattern) {
+        Pattern pattern = Pattern.compile(regexPattern, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(input);
+        boolean matchFound = matcher.find();
+
+        if (matchFound) {
+            return true;
+        }
+        return false;
     }
 }
