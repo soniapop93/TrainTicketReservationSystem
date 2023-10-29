@@ -176,8 +176,8 @@ public class UserLogic {
     }
 
     private boolean checkPhoneNumberPattern(String phoneNumber) {
-        String regexPattern = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
-        return regexMatchFound(phoneNumber ,regexPattern);
+        String regexPattern = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{2,4}$";
+        return regexMatchFound(phoneNumber, regexPattern);
     }
 
     private boolean regexMatchFound (String input, String regexPattern) {

@@ -41,7 +41,7 @@ public class TicketLogic {
                     train.getDepartureLocation(),
                     train.getArrivalLocation(),
                     seatsNumber,
-                    train.getPrice(),
+                    train.getPrice() * seatsNumber,
                     train.getTimeOfDeparture(),
                     train.getEstimatedTimeOfArrival(),
                     true,

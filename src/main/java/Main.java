@@ -18,7 +18,6 @@ public class Main
 		[X] - identify if the user is admin, and if yes show option to add trains in database
          */
 
-
         LogicTrainTicketReservationSystem logic = new LogicTrainTicketReservationSystem();
         logic.reservationSystem();
     }
