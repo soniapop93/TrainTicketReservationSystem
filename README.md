@@ -16,8 +16,6 @@ Requirements:
  - [X]  identify if the user is admin, and if yes show option to add trains in database
 
 
-*Work still in progress ...*
-
 ## Authors
 
 - [@soniapop93](https://github.com/soniapop93)
